@@ -35,12 +35,9 @@
     <?php 
         include('includes/header.php');
     ?>
-    <div>
-        <img id="selectedImage" alt="frame" />
-        <h1 id="size"></h1>
-        <h1 id="color"></h1>
-
+    <div class="grid grid-cols-2 md:grid-cols-3 gap-2" id="content-container">
     </div>
+    <div id="text-container"></div>
     <?php
         include('includes/footer.php');   
     ?>
@@ -49,45 +46,61 @@
 <!-- http://localhost/wordpress/checkout/ -->
 <script>
   // Retrieve values from local storage
-  const setImage = document.getElementById("selectedImage");
-  const setSize = document.getElementById("size");
-  const setColor = document.getElementById("color");
+    const contentContainer = document.getElementById("content-container")
+    const textContainer = document.getElementById("text-container")
 
-  const selectedImages = localStorage.getItem("selectedImages");
+    // const selectedImages = localStorage.getItem("selectedImages");
+    const selectedImage = localStorage.getItem("selectedImage");
 
   // Check if frame or collage localStorage items are available
   if (localStorage.getItem("frameColor") && localStorage.getItem("frameSize")) {
     // Frame items are available
     const frameColor = localStorage.getItem("frameColor");
     const frameSize = localStorage.getItem("frameSize");
-
-    setImage.src = selectedImage;
-    setImage.style.border = `10px solid ${frameColor}`;
     const [width, height] = frameSize.split("x").map(Number);
-    setImage.style.width = `${width}cm`;
-    setImage.style.height = `${height}cm`;
+    const frameHTML = `
+      <img src="${selectedImage}" alt="frame" style="border: 10px solid ${frameColor}; width: ${width}cm; height: ${height}cm;" />
+     
+    `;
+    const frameDetailsHTML = `
+      <h1 id="size">${frameSize}</h1>
+      <h1 id="color">${frameColor}</h1>
+    `;
 
-    // Use the retrieved values as needed in your checkout page
-    setSize.textContent = frameSize;
-    setColor.textContent = frameColor;
+    contentContainer.insertAdjacentHTML('beforeend', frameHTML);
+    textContainer.insertAdjacentHTML('beforeend', frameDetailsHTML);
+
+    
   } else if (localStorage.getItem("selectedImages") && localStorage.getItem("collageColor") && localStorage.getItem("collageSize")) {
     // Collage items are available
     const collageImages = JSON.parse(localStorage.getItem("selectedImages"));
     const collageColor = localStorage.getItem("collageColor");
     const collageSize = localStorage.getItem("collageSize");
 
-    // Display collage images (you may customize this based on your collage structure)
+    // Render collage images (you may customize this based on your collage structure)
     collageImages.forEach(image => {
-      const imgElement = document.createElement('img');
-      imgElement.src = image.url; // Assuming the structure of selectedImages
-      imgElement.classList.add('collageImage');
-      document.body.appendChild(imgElement);
+        console.log(image)
+      const imgHTML = `<img  src="${image}" alt="collage-image" class="collageImage" />`;
+      contentContainer.insertAdjacentHTML('beforeend', imgHTML);
     });
 
-    // Use the retrieved values as needed in your checkout page
-    setSize.textContent = collageSize;
-    setColor.textContent = collageColor;
+    const collageDetailsHTML = `
+      <h1 id="size">${collageSize}</h1>
+      <h1 id="color">${collageColor}</h1>
+    `;
+
+    contentContainer.style.border = `10px solid ${collageColor}`;
+    // Apply collage size to the image
+    const [width, height] = collageSize.split("x").map(Number);
+    contentContainer.style.width = `${width}cm`;
+    contentContainer.style.height = `${height}cm`;
+
+    textContainer.insertAdjacentHTML('beforeend', collageDetailsHTML);
+  }else {
+    console.log("nothing to show here")
   }
+
+   
 </script>
 
 </body>
