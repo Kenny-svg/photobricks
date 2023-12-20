@@ -1,0 +1,12 @@
+/*
+Theme Name: Photobricks
+Theme URI: http://localhost/wordpress/
+Description: Photo bricks.
+Version: 1.0
+Author: Kenny
+Author URI: http://your-author-url.com
+*/
+body {
+  background-color: #ff0077 !important;
+  font-family: "Fira Sans Condensed", sans-serif;
+}
