@@ -8,7 +8,7 @@
 <body>
     <?php 
         echo '
-            <div class="bg-[#001F3F] h-auto p-5 md:p-10 w-[80%] mx-auto flex items-center justify-center mt-20 rounded-md">
+            <div class="bg-[#091045] h-auto p-5 md:p-10 w-[80%] mx-auto flex items-center justify-center md:mt-[100px]   rounded-md">
                 <div class="flex items-center justify-between mx-8">
                     <div>
                         <h1 class="text-white font-bold md:text-3xl">

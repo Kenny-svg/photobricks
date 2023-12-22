@@ -37,6 +37,7 @@
     include('includes/header.php');
     include('components/Hero1.php');
     include('components/PageSection.php');
+    include('components/FrameCards.php');
     include('components/PageSection2.php');
     include('includes/footer.php');
     ?>

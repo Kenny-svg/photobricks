@@ -35,41 +35,190 @@
     <?php
   /* Template Name: Home */
     include('includes/header.php');
-    echo '
-    <h1 class="text-3xl font-bold mb-8">Terms and Conditions</h1>
+    ?>
+        <div class="flex items-center justify-center w-[80%] mx-auto mt-10">
+            <div>
+                <div class="flex justify-end right-10">
+                    <h3 class="text-3xl md:text-5xl font-semibold mb-10">Privacy Policy</h3>
+                </div>
+            <div>
+                <p class="leading-normal">You will provide us with some information when you use "Photobrics". We therefore wish to be transparent about the data we gather, our methods for using it, those whom we share it with, and the way we manage the content you upload to our "Photobrics" goods and services.</p>
+                <p class="leading-normal mt-2">We wrote our Privacy Policy for that reason. It explains how www.Photobrics.com (the "Site" and the App) collects, uses, and shares your personal information when you visit or make purchases there.  </p>
+                <div class="mt-10">
+                    <div class="flex items-center gap-4 font-bold text-3xl font-bold text-xl md:text-3xl">
+                        <h1 class="font-bold">1.</h1>
+                        <p> OUR PERSONAL INFORMATION COLLECTION </p>
+                    </div>
+                <p class="leading-normal mt-2">
+                     We automatically gather certain device-related information when you access the Site, such as your web browser, IP address, time zone, and some of the installed cookies. In addition, we gather data about the specific web pages you visit on the Site., We gather data about the specific webpages or items you visit, the websites or search phrases that led you to the site, and your usage patterns on the site. This automatically gathered data is what we call "Device Information."
+                </p>
+                <p class="leading-normal mt-2">The following technologies are used by us to gather Device Information:</p>
+                <ul class="mt-5">
+                    <li class="flex md:items-center">
+                        <span class="mx-3 rounded-full md:rounded-full bg-brand w-5 h-2 md:w-3 md:h-3 text-white"></span>
+                        "Cookies" are small data files that are stored on your computer or device and frequently contain an anonymous unique identification.
+                    </li>
+                    <li class="flex md:items-center">
+                        <span class="mx-3 rounded-full md:rounded-full bg-brand w-8 h-2 md:w-3 md:h-3 text-white"></span>
+                        "Log files" monitor activity on the website and gather information such as your IP address, browser type, ISP, referring/exit pages, and time and date stamps.
+                    </li>
+                    <li class="flex md:items-center">
+                        <span class="mx-3 rounded-full md:rounded-full bg-brand w-5 h-2 md:w-3 md:h-3 text-white"></span>
+                        "Web beacons," "tags," and "pixels" are digital files that are used to track your navigation on the website.
+                    </li>
+                </ul>
+                                <p class="leading-normal mt-5">
+                    Furthermore, we obtain certain information from you when you attempt to make a purchase on the Site or make a purchase, including the uploaded photographs from your device or linked accounts. Your name, email address, phone number, billing address, shipping address, and payment are also collected by us.  This data is what we call "Order Information." Device information and order information are included in the definition of "Personal Information" in this privacy policy.
+                </p>
+                </div>
+            </div>
+            </div>
+        </div>
 
-    <h2 class="text-2xl font-bold mb-4">1. Introduction</h2>
-    <p class="mb-4">Welcome to [Your Company Name] ("we," "our," or "us"). By accessing or using our website, products, or services, you agree to comply with and be bound by the following terms and conditions. Please read these terms carefully before using our services.</p>
+        <div class="flex items-center justify-center w-[80%] mx-auto mt-5">
+            <div>
+            <div>
+                <div class="mt-10">
+                    <div class="flex items-center gap-4 font-bold text-xl md:text-3xl font-bold md:text-3xl">
+                        <h1 class="">2.</h1>
+                        <p> HOW YOUR PERSONAL INFORMATION IS USED BY US  </p>
+                    </div>
+                <p class="leading-normal mt-2">
+                To complete any transactions completed through the Site, we use the Order Information that we typically gather. This includes handling your payment information, setting up delivery, and sending you bills and/or order confirmations.  "
+                </p>
+                <p class="leading-normal mt-2">Furthermore, we employ this Order Information in order to:</p>
 
-    <h2 class="text-2xl font-bold mb-4">2. Use of Our Services</h2>
-    <p class="mb-4">By using our services, you agree to abide by all applicable laws and regulations. You also agree not to:</p>
-    <ul class="list-disc ml-6 mb-4">
-        <li>Violate any applicable laws or regulations.</li>
-        <li>Use our services for any illegal or unauthorized purpose.</li>
-        <li>Interfere with or disrupt the integrity or performance of our services.</li>
-        <li>Attempt to gain unauthorized access to our services or their related systems or networks.</li>
-    </ul>
+                <ul class="ml-5 mt-5">
+                    <li class="flex md:items-center"> <span class="mx-3 rounded-full md:rounded-full bg-brand w-8 h-2 md:w-3 md:h-3 text-white"></span> Communicate with you;</li>
+                    <li class="flex md:items-center"> <span class="mx-3 rounded-full md:rounded-full bg-brand w-8 h-2 md:w-3 md:h-3 text-white"></span>send you advertisements for our goods and services or information that is relevant to your choices.</li>
+                    <li class="flex md:items-center"> <span class="mx-3 rounded-full md:rounded-full bg-brand w-8 h-2 md:w-3 md:h-3 text-white"></span> Check our orders for fraud or other possible risks;</li>
+                </ul>
+                <p class="leading-normal mt-5">
+                    In addition to using the Device Information we get to enhance and optimise our site more generally, we utilise it to check for possible fraud and risk. (For instance, we may evaluate the effectiveness of our marketing and advertising initiatives by using the Device Information gathered to create analytics about how our customers use the Site and explore it.)
+ 
+                </p>
+                </div>
+            </div>
+            </div>
+        </div>
 
-    <h2 class="text-2xl font-bold mb-4">3. Intellectual Property</h2>
-    <p class="mb-4">All content, trademarks, logos, and intellectual property on our website or services are the property of [Your Company Name] and are protected by applicable copyright and trademark laws.</p>
+        <div class="flex items-center justify-center w-[80%] mx-auto mt-5">
+         <div>
+             <div class="mt-10">
+                <div class="flex items-center gap-4 font-bold text-3xl">
+                    <h1 class="font-bold text-3xl">3.</h1>
+                    <p> HOW YOUR PERSONAL INFORMATION IS SHARED BY US     </p>
+                </div>
+            <p class="leading-normal mt-2">
+            Third-party service providers that offer services and functionality on our services are the recipients of your Personal Information. We will only use your personal information in compliance with this privacy policy and only where permission is given.
+            </p>
+            <p class="leading-normal mt-2">To better understand how our customers use the Site, we also use Google Analytics. You can learn more about how Google handles your Personal Information here. Lastly, in order to defend our rights or to comply with relevant laws and regulations, we may also disclose your Personal Information in response to a subpoena, search warrant, or other legitimate requests for information that we receive.  </p>
 
-    <h2 class="text-2xl font-bold mb-4">4. Privacy Policy</h2>
-    <p class="mb-4">Your use of our services is also governed by our Privacy Policy. Please review our Privacy Policy to understand how we collect, use, and disclose information.</p>
+            
+            </div>
+        </div>
+        </div>
 
-    <h2 class="text-2xl font-bold mb-4">5. Disclaimer of Warranties</h2>
-    <p class="mb-4">Our services are provided "as is" without any warranties, expressed or implied. We do not warrant that our services will be error-free or uninterrupted.</p>
+        <div class="flex items-center justify-center w-[80%] mx-auto mt-5">
+        <div>
+            <div class="mt-10">
+               <div class="flex items-center gap-4 font-bold text-3xl">
+                   <h1 class="font-bold text-3xl">4.</h1>
+                   <p>EMOTIONAL MARKETING</p>
+               </div>
+           <p class="leading-normal mt-2">
+           
+                We use your Personal Information as specified in this Privacy Policy to send you marketing messages or targeted ads that we think you might find interesting.   To withdraw your consent from receiving targeted advertisements, send an email to hello@Photobrics.com.   
+           </p>
+           </div>
+       </div>
+       </div>
 
-    <h2 class="text-2xl font-bold mb-4">6. Limitation of Liability</h2>
-    <p class="mb-4">[Your Company Name] shall not be liable for any indirect, incidental, special, consequential, or punitive damages, or any loss of profits or revenues, whether incurred directly or indirectly.</p>
 
-    <h2 class="text-2xl font-bold mb-4">7. Changes to Terms</h2>
-    <p class="mb-4">We reserve the right to update or modify these terms and conditions at any time. Any changes will be effective immediately upon posting on our website. Your continued use of our services after changes are posted constitutes acceptance of those changes.</p>
+       <div class="flex items-center justify-center w-[80%] mx-auto mt-5">
+         <div>
+             <div class="mt-10">
+                <div class="flex items-center gap-4 font-bold text-3xl">
+                    <h1 class="font-bold text-3xl">5.</h1>
+                    <p>MANAGEMENT OF YOUR DATA </p>
+                </div>
+            <p class="leading-normal mt-2">
+           
+                You are entitled to see your personal information and have any errors corrected. Additionally, you are entitled to have any information we may have about you updated or removed. Please use the contact details listed below to get in touch with us in order to exercise these rights.
+            </p>
+            <p class="leading-normal mt-2"> 
+            Please take note that we process your information in order to carry out any obligations we may have to you (such as when you place a purchase on the website) or to further the above-mentioned legitimate business purposes. 
+             </p>
+            
+            </div>
+        </div>
+        </div>
+        
+        
+        <div class="flex items-center w-[80%] mx-auto mt-5">
+        <div>
+            <div class="mt-10">
+               <div class="flex items-center gap-4 font-bold text-3xl">
+                   <h1 class="font-bold text-3xl">6.</h1>
+                   <p>RETENTION OF DATA</p>
+               </div>
+           <p class="leading-normal mt-2">
+           
+           We will keep your Order Information for our records after you place an order on the Site, unless and until you request that we remove it.  
+           </p>
+           </div>
+       </div>
+       </div>
 
-    <h2 class="text-2xl font-bold mb-4">8. Governing Law</h2>
-    <p class="mb-4">These terms and conditions are governed by and construed in accordance with the laws of [Your Country or State]. Any disputes arising under or in connection with these terms and conditions shall be subject to the exclusive jurisdiction of the courts located in [Your Jurisdiction].</p>
 
-    <p class="mt-8">Last Updated: [Date]</p>
-    ';
+       
+       <div class="flex items-center justify-center w-[80%] mx-auto mt-5">
+       <div>
+           <div class="mt-10">
+              <div class="flex items-center gap-4 font-bold text-3xl">
+                  <h1 class="font-bold text-3xl">7.</h1>
+                  <p>MINORS</p>
+              </div>
+          <p class="leading-normal mt-2">
+          
+          The "Photobrics" website is not accessible to anyone less than 13 years of age. IN THE EVENT THAT YOU ARE UNDER 18, However, if you are older than thirteen, you may only access the "Photobrics" website with your parents or legal guardians prior consent. Before using the "Photobrics" website, please make sure your parent or legal guardian has accepted these terms of use on your behalf.
+ 
+          </p>
+          </div>
+      </div>
+      </div>
+
+
+      <div class="flex items-center justify-center w-[80%] mx-auto mt-5">
+       <div>
+           <div class="mt-10">
+              <div class="flex items-center gap-4 font-bold text-3xl">
+                  <h1 class="font-bold text-3xl">8.</h1>
+                  <p>CHANGES TO THE PRIVACY STATUS</p>
+              </div>
+          <p class="leading-normal mt-2">
+          
+          We reserve the right to periodically update this privacy statement to reflect our most recent privacy procedures. Additional operational, legal, or regulatory needs may also necessitate changes.
+ 
+ 
+          </p>
+          </div>
+      </div>
+      </div>
+
+      <div class="flex items-center justify-end w-[80%] mx-auto mt-10">
+      <div>
+        <h1 class="text-right ">SPEAK WITH US</h1>
+        <p>
+        Please email us at <strong>hello@Photobrics.com</strong> with any questions, concerns, or to file a complaint for more details about our privacy policies.
+        </p>
+      </div>
+      </div>
+        
+
+
+        
+    <?php
     include('includes/footer.php');
     ?>
         

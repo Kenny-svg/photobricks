@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -38,6 +37,17 @@
             height: 100px;
             object-fit: cover;
         }
+        #default-tab button {
+        color: #091045; 
+        border-color: transparent;
+    }
+
+    /* Active tab styles */
+    #default-tab button[aria-selected="true"] {
+        color: #ff0077; /* Text color for the active tab */
+        /* border-color: transparent; */
+        border-color:#ff0077;
+    }
 
   </style>
 </head>
@@ -49,25 +59,29 @@
 
 
     
-    <div class="mb-4 border-b border-gray-200 dark:border-gray-700">
-        <ul class="flex flex-wrap -mb-px text-sm font-medium text-center" id="default-tab" data-tabs-toggle="#default-tab-content" role="tablist">
+    <div class="mb-4 border-b border-gray-brand dark:border-gray-700 md:w-[70%] mx-auto">
+        <ul class="flex md:flex-wrap -mb-px text-sm font-medium text-center" id="default-tab" data-tabs-toggle="#default-tab-content" role="tablist">
             <li class="me-2" role="presentation">
-                <button class="inline-block p-4 border-b-2 rounded-t-lg" id="profile-tab" data-tabs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Photo Tiles</button>
+                <button class="inline-block p-4 border-b-2 rounded-t-lg font-bold text-xl" id="profile-tab" data-tabs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Photo Tiles</button>
             </li>
             <li class="me-2" role="presentation">
-                <button class="inline-block p-4 border-b-2 rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300" id="dashboard-tab" data-tabs-target="#dashboard" type="button" role="tab" aria-controls="dashboard" aria-selected="false">Collage</button>
+                <button class="font-bold inline-block p-4 border-b-2 rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300 text-xl" id="dashboard-tab" data-tabs-target="#dashboard" type="button" role="tab" aria-controls="dashboard" aria-selected="false">Collage</button>
             </li>
           
         </ul>
     </div>
     <div id="default-tab-content">
-        <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-        <form action="http://localhost/wordpress/checkout/" id="imageUpload" method="post">
-
-           <img id="framedPicture" alt="Framed Picture" />
-
-            <input type="file" accept="image/*" onchange={handleImageUpload()} >
-
+        <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800 md:w-[70%] " id="profile" role="tabpanel" aria-labelledby="profile-tab">
+        <form class="md:mx-auto md:flex md:items-center md:justify-center" action="http://localhost/wordpress/checkout/" id="imageUpload" method="post">
+          <div class="flex items-center justify-center">
+            <img class="mt-10 mb-10" id="framedPicture" alt="Framed Picture" />
+          </div>
+            <div class="md:flex md:gap-5 md:items-center md:justify-center">
+            <label for="imageInputTwo">
+            <strong class="font-bold text-3xl text-brand">+</strong>
+        </label>
+        <input id="imageInputTwo" type="file" accept="image/*" style="display: none;">
+            <div>
             <div>
                 <span>Choose frame color</span>
                 <button type="button" onclick="handleFrameColorChange('black')" name="frameColor">Black</button>
@@ -77,19 +91,24 @@
             <div>
                 <span>Choose Frame Size: </span>
                 <button type="button" onclick="handleFrameSizeChange('5x15cm')" name="frameSize">5x10cm</button>
-                <button type="button" onclick="handleFrameSizeChange('8x15cm')" name="frameSize">8x12cm</button>
+                <button type="button" onclick="handleFrameSizeChange('8x12cm')" name="frameSize">8x12cm</button>
                 <button type="button" onclick="handleFrameSizeChange('10x15cm')" name="frameSize">10x15cm</button>
                 <button type="button" onclick="handleFrameSizeChange('12x18cm')"name="frameSize">12x18cm</button>
-        </div>
+            </div>
+            </div>
+            
+            </div>
+           
+        <p id="price_tag_frame"></p>
         <button type="submit">Proceed to checkout</button>
     </form>
     </div>
 
-    <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="dashboard" role="tabpanel" aria-labelledby="dashboard-tab">
+    <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800  w-[70%] mx-auto flex items-center justify-center" id="dashboard" role="tabpanel" aria-labelledby="dashboard-tab">
     <div class="grid grid-cols-2 md:grid-cols-3 border-black border-[10px] gap-2 w-[50%] md:w-[20%]" id="imageContainer"></div>
     <form action="http://localhost/wordpress/checkout/" id="imageUpload" method="post">
         <label for="imageInput">
-            <strong>Choose Images</strong>
+            <strong class="font-bold text-3xl text-brand">+</strong>
         </label>
         <input type="file" id="imageInput" accept="image/*" multiple >
 
@@ -103,10 +122,11 @@
             <div>
                 <span>Choose Frame Size: </span>
                 <button type="button" onclick="handleCollageSizeChange('5x15cm')" name="collageSize">5x10cm</button>
-                <button type="button" onclick="handleCollageSizeChange('8x15cm')" name="collageSize">8x12cm</button>
+                <button type="button" onclick="handleCollageSizeChange('8x12cm')" name="collageSize">8x12cm</button>
                 <button type="button" onclick="handleCollageSizeChange('10x15cm')" name="collageSize">10x15cm</button>
                 <button type="button" onclick="handleCollageSizeChange('12x18cm')"name="collageSize">12x18cm</button>
         </div>
+        <p id="price_tag_collage"></p>
         <button type="submit">Proceed to checkout</button>
     </form>
     </div>
@@ -121,11 +141,77 @@ let selectedImage = null;
 let frameColor = "black";
 let frameSize = "5x10cm"; // Default size
 
+let selectedImages = [];
+let collageColor = "black";
+let collageSize = "10x20cm";
+
+let priceValue;
+
+
+const priceFrame = document.getElementById("price_tag_frame");
+const priceCollage = document.getElementById("price_tag_collage")
+
+// Function to update the price based on the size
+const updatePrice = (productSize) => {
+  const size = productSize;
+  console.log(size)
+
+  switch (size) {
+    case "5x15cm":
+      priceValue = 5000;
+      break;
+    case "8x12cm":
+      priceValue = 8000;
+      break;
+    case "10x15cm":
+      priceValue = 10000;
+      break;
+    case "12x18cm":
+      priceValue = 15000;
+      break;
+    // Add more cases for other sizes as needed
+    default:
+      priceValue = 0; // Default price for unknown sizes
+      break;
+  }
+  priceFrame.textContent = `NGN ${priceValue.toLocaleString()}`;
+  return priceValue;
+};
+
+const updatePriceCollage = (productSize) => {
+  const size = productSize;
+  console.log(size)
+
+  switch (size) {
+    case "5x15cm":
+      priceValue = 5000;
+      break;
+    case "8x12cm":
+      priceValue = 8000;
+      break;
+    case "10x15cm":
+      priceValue = 10000;
+      break;
+    case "12x18cm":
+      priceValue = 15000;
+      break;
+    // Add more cases for other sizes as needed
+    default:
+      priceValue = 0; // Default price for unknown sizes
+      break;
+  }
+  priceCollage.textContent = `NGN ${priceValue.toLocaleString()}`;
+  return priceValue;
+};
+
+
+
 // Function to update local storage
 const updateLocalStorage = () => {
   localStorage.setItem("selectedImage", selectedImage);
   localStorage.setItem("frameColor", frameColor);
   localStorage.setItem("frameSize", frameSize);
+  localStorage.setItem("framePrice", priceValue);
 };
 
 // Handle image upload
@@ -154,9 +240,11 @@ const handleFrameColorChange = (color) => {
 };
 
 // Handle frame size change
-const handleFrameSizeChange = (size) => {
+const handleFrameSizeChange = async (size) => {
   frameSize = size;
+
   updateFramedPicture();
+  await updatePrice(size);
   updateLocalStorage(); // Update local storage on size change
 };
 
@@ -174,23 +262,22 @@ const updateFramedPicture = () => {
   }
 };
 
-// Attach event listener to the image upload input
-const imageUploadInput = document.getElementById("imageUpload");
-imageUploadInput.addEventListener("change", handleImageUpload);
+const imageInputTwo = document.getElementById("imageInputTwo");
+imageInputTwo.addEventListener("change", handleImageUpload);
 
 
 
 /////////////////////////
 ////////////////////////
 ///////////////////////
-let selectedImages = [];
-let collageColor = "black";
-let collageSize = "10x20cm";
+
 
 const updateLocalStorageTwo = () => {
   localStorage.setItem("selectedImages", JSON.stringify(selectedImages));
   localStorage.setItem("collageColor", collageColor);
   localStorage.setItem("collageSize", collageSize);
+  localStorage.setItem("collagePrice", priceValue);
+  
 };
 
 const handleCollageColorChange = (color) => {
@@ -200,9 +287,10 @@ const handleCollageColorChange = (color) => {
 };
 
 // Handle frame size change
-const handleCollageSizeChange = (size) => {
+const handleCollageSizeChange = async (size) => {
   collageSize = size;
   updateCollagePicture();
+  await updatePriceCollage(size);
   updateLocalStorageTwo(); // Update local storage on size change
 };
 
@@ -270,7 +358,10 @@ function readFileAsync(file) {
     reader.readAsDataURL(file);
   });
 }
+//paystack implenmentaion
 
+
+///////////////////////////
 // Restore values from local storage on page load
 window.onload = () => {
   selectedImages = JSON.parse(localStorage.getItem("selectedImages")) || [];

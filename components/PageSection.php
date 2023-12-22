@@ -6,7 +6,7 @@
     <title>Document</title>
     <style>
         .hover {
-            background: #001F3F;
+            background: #091045;
             color: white;
         }
     </style>
@@ -36,9 +36,9 @@
                 </div>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 mt-[60px] md:mt-28 w-[80%] mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-2 mt-[60px] md:mt-[150px] w-[80%] mx-auto ">
                 <div class="md:h-[400px] flex items-center justify-center ">
-                    <h1 class="font-semibold md:text-4xl md:leading-relaxed w-[80%] ">Transform beloved phone pics into re-stickable Photo Bricks Art Frame. Easily removable, reusable, and leave no trace behind – pure photo joy!</h1>
+                    <h1 class="font-semibold md:text-3xl md:leading-normal w-[80%] md:mt-10">Transform beloved phone pics into re-stickable Photo Bricks Art Frame. Easily removable, reusable, and leave no trace behind – pure photo joy!</h1>
                 </div>
                 <div class="w-full mt-10 md:h-[400px] flex items-end justify-center relative">
                     <img class="border-b border-[#001F3F] mt-10 w-[90%]" src="http://localhost/wordpress/wp-content/uploads/2023/12/Attachment-370488-724619293.302227.jpg" alt="couple-image" />

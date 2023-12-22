@@ -63,7 +63,7 @@
     <div class="mb-4 border-b border-gray-brand dark:border-gray-700 md:w-[70%] mx-auto">
         <ul class="flex md:flex-wrap -mb-px text-sm font-medium text-center" id="default-tab" data-tabs-toggle="#default-tab-content" role="tablist">
             <li class="me-2" role="presentation">
-                <button class="inline-block p-4 border-b-2 rounded-t-lg font-bold text-xl" id="profile-tab" data-tabs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Photo Tiles</button>
+                <button class="inline-block p-4 border-b-2 rounded-t-lg font-bold text-xl" id="profile-tab" data-tabs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Photo Tilesee</button>
             </li>
             <li class="me-2" role="presentation">
                 <button class="font-bold inline-block p-4 border-b-2 rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300 text-xl" id="dashboard-tab" data-tabs-target="#dashboard" type="button" role="tab" aria-controls="dashboard" aria-selected="false">Collage</button>
@@ -86,7 +86,7 @@
 
             <div>
             <div>
-                <span>Choose frame color</span>
+                <span>Choose frame color </span>
                 <button type="button" onclick="handleFrameColorChange('black')" name="frameColor">Black</button>
                 <button type="button" onclick="handleFrameColorChange('white')" name="frameColor">White</button>
                 <button type="button" onclick="handleFrameColorChange('brown')" name="frameColor">Brown</button>

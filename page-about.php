@@ -35,7 +35,7 @@
     echo '
     <!-- Header Section -->
     <header class="bg-[#001F3F] text-white text-center py-12">
-        <h1 class="text-4xl font-extrabold">Meet Photobricks</h1>
+        <h1 class="text-4xl font-extrabold">Meet Photobrics</h1>
         <p class="text-lg mt-4">Preserving memories with stickable frames</p>
     </header>
 
@@ -57,7 +57,7 @@
         </section>
 
         <section class="bg-white p-8 rounded-lg shadow-lg mt-8">
-            <h2 class="text-3xl font-bold mb-4">Why Choose Photobricks</h2>
+            <h2 class="text-3xl font-bold mb-4">Why Choose Photobrics</h2>
             <p class="text-gray-700 leading-relaxed">
                 - Innovative display solutions<br>
                 - Craftsmanship that cares for your memories<br>
@@ -117,6 +117,8 @@
 
     include('includes/footer.php');
     ?>
+
+
 
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.0/flowbite.min.js"></script>

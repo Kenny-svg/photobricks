@@ -10,7 +10,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Fira+Sans+Condensed:ital,wght@0,100;0,200;0,400;1,100;1,200;1,400&family=Inter:wght@400;500;600&family=Josefin+Sans:ital,wght@0,100;0,300;0,400;0,500;1,200;1,300;1,400&display=swap" rel="stylesheet ">
     <script src="https://cdn.tailwindcss.com"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.0/flowbite.min.js"></script>
-
+<script src="https://js.paystack.co/v1/inline.js"></script>
   <script>
     tailwind.config = {
       theme: {
@@ -35,9 +35,66 @@
     <?php 
         include('includes/header.php');
     ?>
-    <div class="grid grid-cols-2 md:grid-cols-3 gap-2" id="content-container">
+    <div id="content-container">
     </div>
     <div id="text-container"></div>
+
+      
+
+<!-- Modal toggle -->
+<button data-modal-target="default-modal" data-modal-toggle="default-modal" class="block text-white bg-brand  font-medium rounded-lg text-sm px-5 py-2.5 text-center  " type="button">
+  Add Address
+</button>
+
+<!-- Main modal -->
+<div id="default-modal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+    <div class="relative p-4 w-full max-w-2xl max-h-full">
+        <!-- Modal content -->
+        <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+            <!-- Modal header -->
+            <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+                <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+                    Add Address
+                </h3>
+                <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="default-modal">
+                    <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                    </svg>
+                    <span class="sr-only">Close modal</span>
+                </button>
+            </div>
+            <!-- Modal body -->
+            <div class="p-4 md:p-5 space-y-4">
+               <form>
+                <div>
+                  <label for="email"></label>
+                  <input class="border border-bg-500 w-full rounded-md py-2.5 mt-5 focus:ring-2 focus:outline-none focus:ring-brand font-medium rounded-lg text-sm px-5 py-2.5  dark:bg-blue-600 dark:hover:bg-gray-300 dark:focus:ring-blue-800" type="email" id="email" name="email" require>
+                </div>
+
+                <div>
+                  <label for="fullname"></label>
+                  <input class="border border-bg-500 w-full rounded-md py-2.5 mt-5 focus:ring-2 focus:outline-none focus:ring-brand font-medium rounded-lg text-sm px-5 py-2.5  dark:bg-blue-600 dark:hover:bg-gray-300 dark:focus:ring-blue-800" type="text" id="fullname" name="name" require>
+                </div>
+
+                <div>
+                  <label for="address"></label>
+                  <input class="border border-bg-500 w-full rounded-md py-2.5 mt-5 focus:ring-2 focus:outline-none focus:ring-brand font-medium rounded-lg text-sm px-5 py-2.5  dark:bg-blue-600 dark:hover:bg-gray-300 dark:focus:ring-blue-800" type="text" id="address" name="address" require>
+                </div>
+
+                <div class="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
+                        <button type="button" onclick="submitForm()" class="text-white bg-brand hover:bg-gray-800 focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center">Submit</button>
+                    </div>
+               </form>
+            </div>
+            <!-- Modal footer -->
+           
+        </div>
+    </div>
+</div>
+
+
+    <p id="no-item"></p>
+    <button onclick="payWithPaystack()">Proceed to payment</button>
     <?php
         include('includes/footer.php');   
     ?>
@@ -45,60 +102,171 @@
 <!-- http://localhost/wordpress/checkout/ -->
 <!-- http://localhost/wordpress/checkout/ -->
 <script>
-  // Retrieve values from local storage
-    const contentContainer = document.getElementById("content-container")
-    const textContainer = document.getElementById("text-container")
+        const contentContainer = document.getElementById("content-container");
+        const noItem = document.getElementById("no-item");
+        const selectedImage = localStorage.getItem("selectedImage");
+        const frameColor = localStorage.getItem("frameColor");
+        const frameSize = localStorage.getItem("frameSize");
+        const framePrice = parseFloat(localStorage.getItem("framePrice"));
+        const collageImages = JSON.parse(localStorage.getItem("selectedImages"));
+        const collageColor = localStorage.getItem("collageColor");
+        const collageSize = localStorage.getItem("collageSize");
+        const collagePrice = parseFloat(localStorage.getItem("collagePrice"));
 
-    // const selectedImages = localStorage.getItem("selectedImages");
-    const selectedImage = localStorage.getItem("selectedImage");
 
-  // Check if frame or collage localStorage items are available
-  if (localStorage.getItem("frameColor") && localStorage.getItem("frameSize")) {
-    // Frame items are available
-    const frameColor = localStorage.getItem("frameColor");
-    const frameSize = localStorage.getItem("frameSize");
-    const [width, height] = frameSize.split("x").map(Number);
-    const frameHTML = `
-      <img src="${selectedImage}" alt="frame" style="border: 10px solid ${frameColor}; width: ${width}cm; height: ${height}cm;" />
-     
-    `;
-    const frameDetailsHTML = `
-      <h1 id="size">${frameSize}</h1>
-      <h1 id="color">${frameColor}</h1>
-    `;
+        const textContainer = document.getElementById("text-container")
+        const shippingFee = 2000;
 
-    contentContainer.insertAdjacentHTML('beforeend', frameHTML);
-    textContainer.insertAdjacentHTML('beforeend', frameDetailsHTML);
+        
+        let totalCollagePrice = collagePrice + shippingFee;
+        let totalFramePrice = framePrice + shippingFee;
+        console.log(totalFramePrice)
 
-    
-  } else if (localStorage.getItem("selectedImages") && localStorage.getItem("collageColor") && localStorage.getItem("collageSize")) {
-    // Collage items are available
-    const collageImages = JSON.parse(localStorage.getItem("selectedImages"));
-    const collageColor = localStorage.getItem("collageColor");
-    const collageSize = localStorage.getItem("collageSize");
 
-    // Render collage images (you may customize this based on your collage structure)
-    collageImages.forEach(image => {
-        console.log(image)
-      const imgHTML = `<img  src="${image}" alt="collage-image" class="collageImage" />`;
-      contentContainer.insertAdjacentHTML('beforeend', imgHTML);
-    });
+        function submitForm() {
+          location.reload();
+            // Get form values
+            const email = document.getElementById('email').value;
+            const fullname = document.getElementById('fullname').value;
+            const address = document.getElementById('address').value;
 
-    const collageDetailsHTML = `
-      <h1 id="size">${collageSize}</h1>
-      <h1 id="color">${collageColor}</h1>
-    `;
 
-    contentContainer.style.border = `10px solid ${collageColor}`;
-    // Apply collage size to the image
-    const [width, height] = collageSize.split("x").map(Number);
-    contentContainer.style.width = `${width}cm`;
-    contentContainer.style.height = `${height}cm`;
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                alert('Please enter a valid email address.');
+                return;
+            }
 
-    textContainer.insertAdjacentHTML('beforeend', collageDetailsHTML);
-  }else {
-    console.log("nothing to show here")
-  }
+            // Validate fullname and address are not empty
+            if (!fullname.trim() || !address.trim()) {
+                alert('Full Name and Address must not be empty.');
+                return;
+            }
+
+            // Create an object to store user information
+            const userInfo = {
+                email: email,
+                fullname: fullname,
+                address: address,
+            };
+
+
+
+            // Store user information in localStorage
+            localStorage.setItem('userInfo', JSON.stringify(userInfo));
+
+        }
+        function displayUserInfo() {
+            // Get the user information from localStorage
+            const storedUserInfo = localStorage.getItem('userInfo');
+
+            // Check if user information exists
+            if (storedUserInfo) {
+                // Parse the stored JSON string
+                const userInfo = JSON.parse(storedUserInfo);
+
+                // Display user information on the screen (you can modify this as needed)
+                const userDetails = `Email: ${userInfo.email}\n Full Name: ${userInfo.fullname}\n Address: ${userInfo.address}`
+                textContainer.insertAdjacentHTML('beforeend', userDetails);
+            }
+        }
+        
+            // Retrieve and display user information on the screen
+          displayUserInfo();
+            
+
+        // Check if frame or collage localStorage items are available
+        if (frameColor && frameSize) {
+            // Frame items are available
+            const frameHTML = `<img src="${selectedImage}" alt="frame" />`;
+            const frameDetailsHTML = `<h1 class="text-lg font-bold mb-2">Size: ${frameSize}</h1><h1 class="text-lg font-bold">Color: ${frameColor}</h1>
+            
+            <h1 class="text-lg font-bold mb-2">Price: NGN ${framePrice.toLocaleString()}</h1>
+            <p>Shipping fee: ${shippingFee.toLocaleString()}</p>
+            <p>Total: NGN ${(totalFramePrice).toLocaleString()}</p>
+            `;
+           
+            contentContainer.style.border = `10px solid ${frameColor}`;
+            const [width, height] = frameSize.split("x").map(Number);
+            contentContainer.style.width = `${width}cm`;
+            contentContainer.style.height = `${height}cm`;
+            contentContainer.insertAdjacentHTML('beforeend', frameHTML);
+            textContainer.insertAdjacentHTML('beforeend', frameDetailsHTML);
+           
+        } else if (collageImages && collageColor && collageSize) {
+            // Collage items are available
+            collageImages.forEach(image => {
+                const imgHTML = `<img src="${image}" alt="collage-image"  />`;
+                contentContainer.insertAdjacentHTML('beforeend', imgHTML);
+            });
+
+            const collageDetailsHTML = `<h1 class="text-lg font-bold mb-2">Size: ${collageSize}</h1><h1 class="text-lg font-bold">Color: ${collageColor}</h1>
+            
+            <h1 class="text-lg font-bold mb-2">Price: NGN ${collagePrice.toLocaleString()}</h1>
+            <p>Shipping fee: ${shippingFee.toLocaleString()}</p>
+            <p>Total: NGN ${(totalCollagePrice).toLocaleString()}</p>
+            `;
+            
+            contentContainer.classList.add('grid', 'grid-cols-2', 'md:grid-cols-3', 'gap-2');
+            contentContainer.style.border = `10px solid ${collageColor}`;
+            const [width, height] = collageSize.split("x").map(Number);
+            contentContainer.style.width = `${width}cm`;
+            contentContainer.style.height = `${height}cm`;
+            textContainer.insertAdjacentHTML('beforeend', collageDetailsHTML);
+            
+        } else {
+            console.log("nothing to show here")
+            noItem.textContent = "Nothing to display here";
+        }
+
+
+        function generateUniqueReference() {
+  // Add your static text or prefix
+  const prefix = 'ORDER';
+
+  // Assuming you have a user ID available, replace 'USER_ID' with the actual user ID
+  const userId = 'USER_ID';
+
+  // Generate a timestamp (Unix timestamp in seconds)
+  const timestamp = Math.floor(Date.now() / 1000);
+
+  // Combine the prefix, user ID, and timestamp to create a unique reference
+  const uniqueReference = `${prefix}_${userId}_${timestamp}`;
+
+  return uniqueReference;
+}
+
+function payWithPaystack() {
+  // Replace with your actual public key
+  const publicKey = 'pk_test_4ad2c4a9c9a5bddb40931ee178ee47339f7f5d2a';
+
+  // Assuming totalFramePrice and shippingFee are calculated dynamically
+  // const totalFramePrice = calculateTotalFramePrice();
+  // const shippingFee = calculateShippingFee();
+
+  // Calculate the total amount in kobo (Naira * 100)
+  const totalAmount = (totalFramePrice) * 100;
+
+  // Generate a unique reference for this transaction
+  const uniqueReference = generateUniqueReference();
+
+  const handler = PaystackPop.setup({
+    key: publicKey,
+    email: 'kennyfagbenro44@gmail.com', // User's email address
+    amount: totalAmount,
+    ref: uniqueReference,
+    callback: function (response) {
+      // Handle the success callback
+      alert('Payment successful. Reference: ' + response.reference);
+    },
+    onClose: function () {
+      // Handle the close event (optional)
+      alert('Transaction closed.');
+    },
+  });
+
+  handler.openIframe();
+}
 
    
 </script>
