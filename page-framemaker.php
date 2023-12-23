@@ -30,7 +30,10 @@
     #imageInput {
             display: none;
         }
-
+      .active {
+        border: 1px solid #ff0077;
+        color: #091045;
+      }
 
         .uploadedImage {
             width: 100%;
@@ -48,6 +51,7 @@
         /* border-color: transparent; */
         border-color:#ff0077;
     }
+
 
   </style>
 </head>
@@ -71,63 +75,87 @@
         </ul>
     </div>
     <div id="default-tab-content">
-        <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800 md:w-[70%] " id="profile" role="tabpanel" aria-labelledby="profile-tab">
-        <form class="md:mx-auto md:flex md:items-center md:justify-center" action="http://localhost/wordpress/checkout/" id="imageUpload" method="post">
-          <div class="flex items-center justify-center">
-            <img class="mt-10 mb-10" id="framedPicture" alt="Framed Picture" />
-          </div>
-            <div class="md:flex md:gap-5 md:items-center md:justify-center">
-            <label for="imageInputTwo">
-            <strong class="font-bold text-3xl text-brand">+</strong>
+        <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800 md:w-[70%] md:mx-auto" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+        <form action="http://localhost/wordpress/checkout/" id="imageUpload" method="post">
+          <div class="flex items-center flex-col justify-center">
+              <img class="mb-10 shadow-lg" id="framedPicture" alt="Framed Picture" />
+            <label for="imageInputTwo" class="cursor-pointer relative">
+            <div class="font-bold h-[70px] w-[70px] flex items-center justify-center text-[70px] text-brand border rounded-full border-brand ">+</div>
         </label>
+          </div>
         <input id="imageInputTwo" type="file" accept="image/*" style="display: none;">
-            <div>
-            <div>
-                <span>Choose frame color</span>
-                <button type="button" onclick="handleFrameColorChange('black')" name="frameColor">Black</button>
-                <button type="button" onclick="handleFrameColorChange('white')" name="frameColor">White</button>
-                <button type="button" onclick="handleFrameColorChange('brown')" name="frameColor">Brown</button>
+        <div class="grid md:grid-cols-none grid-cols-2">
+        <div class="mt-5">
+            <div class="md:flex md:items-center md:justify-start">
+              <div class="font-normal text-sm ">Choose a frame color:</div>
+              <div class="flex items-center flex-wrap">
+                  <button class="border rounded-md py-2 md:py-3 px-2.5 text-xs md:text-normal md:px-10 text-gray-500 ml-5 mt-3 md:mt-0" type="button" onclick="handleFrameColorChange('black')" name="frameColor">Black</button>
+                  <button class="border rounded-md py-2 md:py-3 px-2.5 text-xs md:text-normal md:px-10 text-gray-500 ml-5 mt-3 md:mt-0" type="button" onclick="handleFrameColorChange('white')" name="frameColor">White</button>
+                  <button class="border rounded-md py-2 md:py-3 px-2.5 text-xs md:text-normal md:px-10 text-gray-500 ml-5 mt-3 md:mt-0" type="button" onclick="handleFrameColorChange('brown')" name="frameColor">Brown</button>
+              </div>
             </div>
-            <div>
-                <span>Choose Frame Size: </span>
-                <button type="button" onclick="handleFrameSizeChange('5x15cm')" name="frameSize">5x10cm</button>
-                <button type="button" onclick="handleFrameSizeChange('8x12cm')" name="frameSize">8x12cm</button>
-                <button type="button" onclick="handleFrameSizeChange('10x15cm')" name="frameSize">10x15cm</button>
-                <button type="button" onclick="handleFrameSizeChange('12x18cm')"name="frameSize">12x18cm</button>
+        </div>
+            <div class="mt-5">
+            <div class="md:flex md:items-center md:justify-start">
+              <div class="font-normal text-sm mr-1">Choose a frame size: </div>
+              <div class="flex items-center flex-wrap">
+                <button class="border rounded-md py-2 md:py-3 px-2.5 text-xs md:text-normal md:px-10 text-gray-500 ml-5 mt-3 md:mt-0" type="button" onclick="handleFrameSizeChange('5x15cm')" name="frameSize">5x10cm</button>
+                <button class="border rounded-md py-2 md:py-3 px-2.5 text-xs md:text-normal md:px-10 text-gray-500 ml-5 mt-3 md:mt-0" type="button" onclick="handleFrameSizeChange('8x12cm')" name="frameSize">8x12cm</button>
+                <button class="border rounded-md py-2 md:py-3 px-2.5 text-xs md:text-normal md:px-10 text-gray-500 ml-5 mt-3 md:mt-0" type="button" onclick="handleFrameSizeChange('10x15cm')" name="frameSize">10x15cm</button>
+                <button class="border rounded-md py-2 md:py-3 px-2.5 text-xs md:text-normal md:px-10 text-gray-500 ml-5 mt-3 md:mt-0" type="button" onclick="handleFrameSizeChange('12x18cm')"name="frameSize">12x18cm</button>
+              </div>
             </div>
-            </div>
+        </div>
             
-            </div>
-           
-        <p id="price_tag_frame"></p>
-        <button type="submit">Proceed to checkout</button>
+        </div>
+            <div class="flex items-center justify-center mx-auto w-[70%] mt-10">
+                <div>
+                  <p class="text-left font-bold" id="price_tag_frame"></p>
+                  <button class="bg-[#091045] py-3 px-3 text-white rounded-md" type="submit">Proceed to checkout</button>
+                </div>
+           </div>           
     </form>
     </div>
 
-    <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800  w-[70%] mx-auto flex items-center justify-center" id="dashboard" role="tabpanel" aria-labelledby="dashboard-tab">
-    <div class="grid grid-cols-2 md:grid-cols-3 border-black border-[10px] gap-2 w-[50%] md:w-[20%]" id="imageContainer"></div>
+    <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800  w-[70%] mx-auto" id="dashboard" role="tabpanel" aria-labelledby="dashboard-tab">
+
     <form action="http://localhost/wordpress/checkout/" id="imageUpload" method="post">
-        <label for="imageInput">
-            <strong class="font-bold text-3xl text-brand">+</strong>
+      <div class="flex flex-col">
+        <div class="grid grid-cols-2 md:grid-cols-3 border-black border-[10px] gap-2 mx-auto w-[50%] mb-10 shadow-lg md:w-[20%]" id="imageContainer"></div>
+        <label for="imageInput" class="cursor-pointer relative mx-auto">
+            <div class="font-bold h-[100px] w-[100px] text-center  text-[70px] text-brand border rounded-full border-brand hover:shadow-xl">+</div>
         </label>
-        <input type="file" id="imageInput" accept="image/*" multiple >
-
-
-        <div>
-                <span>Choose frame color</span>
-                <button type="button" onclick="handleCollageColorChange('black')" name="collageColor">Black</button>
-                <button type="button" onclick="handleCollageColorChange('white')" name="collageColor">White</button>
-                <button type="button" onclick="handleCollageColorChange('brown')" name="collageColor">Brown</button>
+          <input type="file" id="imageInput" accept="image/*" multiple >
+      </div>
+      
+       
+        <div class="mt-10">
+            <div class="flex items-center justify-start">
+              <div>
+                <div class="font-normal text-sm">Choose a frame color:</div>
+                  <button class="border rounded-md py-2.5 px-10 text-gray-500" type="button" onclick="handleCollageColorChange('black')" name="collageColor">Black</button>
+                  <button class="border rounded-md py-2.5 px-10 text-gray-500 mx-6" type="button" onclick="handleCollageColorChange('white')" name="collageColor">White</button>
+                  <button class="border rounded-md py-2.5 px-10 text-gray-500" type="button" onclick="handleCollageColorChange('brown')" name="collageColor">Brown</button>
+              </div>
             </div>
-            <div>
-                <span>Choose Frame Size: </span>
-                <button type="button" onclick="handleCollageSizeChange('5x15cm')" name="collageSize">5x10cm</button>
-                <button type="button" onclick="handleCollageSizeChange('8x12cm')" name="collageSize">8x12cm</button>
-                <button type="button" onclick="handleCollageSizeChange('10x15cm')" name="collageSize">10x15cm</button>
-                <button type="button" onclick="handleCollageSizeChange('12x18cm')"name="collageSize">12x18cm</button>
-        </div>
-        <p id="price_tag_collage"></p>
-        <button type="submit">Proceed to checkout</button>
+            <div  class="flex items-center justify-start mt-5">
+              <div>
+              <div class="font-normal text-sm">Choose Frame Size: </div>
+                <button class="border rounded-md py-2.5 px-10 text-gray-500" type="button" onclick="handleCollageSizeChange('5x15cm')" name="collageSize">5x10cm</button>
+                <button class="border rounded-md py-2.5 px-10 text-gray-500 mx-6" type="button" onclick="handleCollageSizeChange('8x12cm')" name="collageSize">8x12cm</button>
+                <button class="border rounded-md py-2.5 px-10 text-gray-500 mx-6" type="button" onclick="handleCollageSizeChange('10x15cm')" name="collageSize">10x15cm</button>
+                <button class="border rounded-md py-2.5 px-10 text-gray-500" type="button" onclick="handleCollageSizeChange('12x18cm')" name="collageSize">12x18cm</button>
+              </div>
+                
+            </div>
+            </div>
+            <div class="flex items-center justify-center mx-auto w-[70%] mt-10">
+                <div>
+                  <p class="text-left font-bold" id="price_tag_collage"></p>
+                  <button class="bg-[#091045] py-2.5 px-3 text-white rounded-md" type="submit">Proceed to checkout</button>
+                </div>
+           </div>
+       
     </form>
     </div>
     </div>
@@ -137,245 +165,244 @@
        include('includes/footer.php');
     ?>
 <script>
-let selectedImage = null;
-let frameColor = "black";
-let frameSize = "5x10cm"; // Default size
-
-let selectedImages = [];
-let collageColor = "black";
-let collageSize = "10x20cm";
-
-let priceValue;
-
-
-const priceFrame = document.getElementById("price_tag_frame");
-const priceCollage = document.getElementById("price_tag_collage")
-
-// Function to update the price based on the size
-const updatePrice = (productSize) => {
-  const size = productSize;
-  console.log(size)
-
-  switch (size) {
-    case "5x15cm":
-      priceValue = 5000;
-      break;
-    case "8x12cm":
-      priceValue = 8000;
-      break;
-    case "10x15cm":
-      priceValue = 10000;
-      break;
-    case "12x18cm":
-      priceValue = 15000;
-      break;
-    // Add more cases for other sizes as needed
-    default:
-      priceValue = 0; // Default price for unknown sizes
-      break;
-  }
-  priceFrame.textContent = `NGN ${priceValue.toLocaleString()}`;
-  return priceValue;
-};
-
-const updatePriceCollage = (productSize) => {
-  const size = productSize;
-  console.log(size)
-
-  switch (size) {
-    case "5x15cm":
-      priceValue = 5000;
-      break;
-    case "8x12cm":
-      priceValue = 8000;
-      break;
-    case "10x15cm":
-      priceValue = 10000;
-      break;
-    case "12x18cm":
-      priceValue = 15000;
-      break;
-    // Add more cases for other sizes as needed
-    default:
-      priceValue = 0; // Default price for unknown sizes
-      break;
-  }
-  priceCollage.textContent = `NGN ${priceValue.toLocaleString()}`;
-  return priceValue;
-};
-
-
-
-// Function to update local storage
-const updateLocalStorage = () => {
-  localStorage.setItem("selectedImage", selectedImage);
-  localStorage.setItem("frameColor", frameColor);
-  localStorage.setItem("frameSize", frameSize);
-  localStorage.setItem("framePrice", priceValue);
-};
-
-// Handle image upload
-const handleImageUpload = (event) => {
-  const file = event?.target.files[0];
-  const reader = new FileReader();
-
-  reader.onloadend = () => {
-    selectedImage = reader.result;
-    // Set frame size to default when an image is selected
-    handleFrameSizeChange("5x10cm");
-    updateFramedPicture();
-    updateLocalStorage(); // Update local storage on image upload
-  };
-
-  if (file) {
-    reader.readAsDataURL(file);
-  }
-};
-
-// Handle frame color change
-const handleFrameColorChange = (color) => {
-  frameColor = color;
-  updateFramedPicture();
-  updateLocalStorage(); // Update local storage on color change
-};
-
-// Handle frame size change
-const handleFrameSizeChange = async (size) => {
-  frameSize = size;
-
-  updateFramedPicture();
-  await updatePrice(size);
-  updateLocalStorage(); // Update local storage on size change
-};
-
-// Update the framed picture
-const updateFramedPicture = () => {
-  const framedPicture = document.getElementById("framedPicture");
-
-  if (selectedImage) {
-    framedPicture.src = selectedImage;
-    framedPicture.style.border = `10px solid ${frameColor}`;
-    // Apply frame size to the image
-    const [width, height] = frameSize.split("x").map(Number);
-    framedPicture.style.width = `${width}cm`;
-    framedPicture.style.height = `${height}cm`;
-  }
-};
-
-const imageInputTwo = document.getElementById("imageInputTwo");
-imageInputTwo.addEventListener("change", handleImageUpload);
-
-
-
-/////////////////////////
-////////////////////////
-///////////////////////
-
-
-const updateLocalStorageTwo = () => {
-  localStorage.setItem("selectedImages", JSON.stringify(selectedImages));
-  localStorage.setItem("collageColor", collageColor);
-  localStorage.setItem("collageSize", collageSize);
-  localStorage.setItem("collagePrice", priceValue);
   
-};
+            let selectedImage = null;
+            let frameColor = "black";
+            let frameSize = "5x10cm"; // Default size
+            let framePrice = 5000;
 
-const handleCollageColorChange = (color) => {
-  collageColor = color;
-  updateCollagePicture();
-  updateLocalStorageTwo(); // Update local storage on color change
-};
+            let selectedImages = [];
+            let collageColor = "black";
+            let collageSize = "10x20cm";
 
-// Handle frame size change
-const handleCollageSizeChange = async (size) => {
-  collageSize = size;
-  updateCollagePicture();
-  await updatePriceCollage(size);
-  updateLocalStorageTwo(); // Update local storage on size change
-};
+            let priceValue;
 
-const imageInput = document.getElementById('imageInput');
-const imageContainer = document.getElementById('imageContainer');
+            const priceFrame = document.getElementById("price_tag_frame");
+            const priceCollage = document.getElementById("price_tag_collage");
 
-const updateCollagePicture = () => {
-    // Clear the existing images in the container
-    imageContainer.innerHTML = "";
-  if (selectedImages.length > 0) {
-    imageContainer.style.border = `10px solid ${collageColor}`;
-    // Apply frame size to the image
-    const [width, height] = collageSize.split("x").map(Number);
-    imageContainer.style.width = `${width}cm`;
-    imageContainer.style.height = `${height}cm`;
+            //get color buttons
+            const colorBtns = document.getElementsByName("frameColor");
 
-    // Append new images to the container
-    selectedImages.forEach(imageUrl => {
-      const imgElement = document.createElement('img');
-      imgElement.src = imageUrl;
-      imgElement.classList.add('uploadedImage');
-      imageContainer.appendChild(imgElement);
-    });
-  }
-};
+            colorBtns.forEach((btn) => {
+              btn.addEventListener('click', function() {
+                // Remove "active" class from all buttons
+                colorBtns.forEach((otherBtn) => {
+                  otherBtn.classList.remove("active");
+                  // Set color to red if the button is not active
+                  if (!otherBtn.classList.contains("active")) {
+                    otherBtn.style.color = "gray";
+                  }
+                });
 
-imageInput.addEventListener('change', handleImageUploadCollage);
+                // Add "active" class to the clicked button
+                btn.classList.add("active");
+                // Remove the red color if the button is active
+                btn.style.color = "#FF0077";
+              });
+            });
 
-function handleImageUploadCollage(event) {
-  const files = event?.target.files;
+            // Function to update the price based on the size
+            const updatePrice = (productSize) => {
+                const size = productSize;
 
-  // Check if files is defined and has a length
-  if (files && files.length) {
-    const fileArray = Array.from(files);
-    const promises = [];
+                switch (size) {
+                    case "5x15cm":
+                        framePrice = 5000;
+                        break;
+                    case "8x12cm":
+                        framePrice = 8000;
+                        break;
+                    case "10x15cm":
+                        framePrice = 10000;
+                        break;
+                    case "12x18cm":
+                        framePrice = 15000;
+                        break;
+                    default:
+                        framePrice = 0;
+                        break;
+                }
+                priceFrame.textContent = `NGN ${framePrice.toLocaleString()}`;
+                return framePrice;
+            };
 
-    // Use Promise.all to wait for all FileReader operations to complete
-    Promise.all(fileArray.map(file => readFileAsync(file)))
-      .then(results => {
-        // All FileReader operations are complete here
-        selectedImages.push(...results);
+            const updatePriceCollage = (productSize) => {
+                const size = productSize;
 
-        updateLocalStorageTwo(); // Update local storage when new images are added
-        handleCollageSizeChange("5x10cm");
-        updateCollagePicture();
-      })
-      .catch(error => {
-        console.error("Error reading files:", error);
-      });
-  }
-}
+                switch (size) {
+                    case "5x15cm":
+                        priceValue = 5000;
+                        break;
+                    case "8x12cm":
+                        priceValue = 8000;
+                        break;
+                    case "10x15cm":
+                        priceValue = 10000;
+                        break;
+                    case "12x18cm":
+                        priceValue = 15000;
+                        break;
+                    default:
+                        priceValue = 5000;
+                        break;
+                }
+                priceCollage.textContent = `NGN ${priceValue.toLocaleString()}`;
+                return priceValue;
+            };
 
-// Function to read a file asynchronously and return a Promise
-function readFileAsync(file) {
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader();
+            const updateLocalStorage = () => {
+                localStorage.setItem("selectedImage", selectedImage);
+                localStorage.setItem("frameColor", frameColor);
+                localStorage.setItem("frameSize", frameSize);
+                localStorage.setItem("framePrice", framePrice);
+            };
 
-    reader.onloadend = () => {
-      // Resolve the Promise with the result of the FileReader operation
-      resolve(reader.result);
-    };
+            const handleImageUpload = (event) => {
+                const fileInput = event.target;
+                const file = fileInput.files[0];
 
-    reader.onerror = reject;
+                if (file) {
+                    const reader = new FileReader();
 
-    reader.readAsDataURL(file);
-  });
-}
-//paystack implenmentaion
+                    reader.onloadend = () => {
+                        selectedImage = reader.result;
+                        updateFramedPicture();
+                        updateLocalStorage();
 
+                        const framedPicture = document.getElementById("framedPicture");
+                        framedPicture.src = selectedImage;
+                    };
 
-///////////////////////////
-// Restore values from local storage on page load
-window.onload = () => {
-  selectedImages = JSON.parse(localStorage.getItem("selectedImages")) || [];
-  collageColor = localStorage.getItem("collageColor") || "black";
-  collageSize = localStorage.getItem("collageSize") || "5x10cm";
+                    reader.readAsDataURL(file);
+                }
+            };
 
-  selectedImage = localStorage.getItem("selectedImage");
-  frameColor = localStorage.getItem("frameColor") || "black";
-  frameSize = localStorage.getItem("frameSize") || "5x10cm";
+            const handleFrameColorChange = (color) => {
+                frameColor = color;
+                updateFramedPicture();
+                updateLocalStorage();
+            };
 
-  updateCollagePicture();
-  updateFramedPicture();
-};
+            const handleFrameSizeChange = async (size) => {
+                frameSize = size;
+                updateFramedPicture();
+                await updatePrice(size);
+                updateLocalStorage();
+            };
 
-</script>
+            const updateFramedPicture = () => {
+                const framedPicture = document.getElementById("framedPicture");
+
+                if (selectedImage) {
+                    framedPicture.src = selectedImage;
+                    framedPicture.style.border = `10px solid ${frameColor}`;
+                    const [width, height] = frameSize.split("x").map(Number);
+                    framedPicture.style.width = `${width}cm`;
+                    framedPicture.style.height = `${height}cm`;
+                    framedPicture.style.display = "block";
+                } else {
+                    framedPicture.style.display = "none";
+                }
+            };
+
+            const imageInputTwo = document.getElementById("imageInputTwo");
+            imageInputTwo.addEventListener("change", handleImageUpload);
+
+            const updateLocalStorageTwo = () => {
+                localStorage.setItem("selectedImages", JSON.stringify(selectedImages));
+                localStorage.setItem("collageColor", collageColor);
+                localStorage.setItem("collageSize", collageSize);
+                localStorage.setItem("collagePrice", priceValue);
+            };
+
+            const handleCollageColorChange = (color) => {
+                collageColor = color;
+                updateCollagePicture();
+                updateLocalStorageTwo();
+            };
+
+            const handleCollageSizeChange = async (size) => {
+                collageSize = size;
+                updateCollagePicture();
+                await updatePriceCollage(size);
+                updateLocalStorageTwo();
+            };
+
+            const imageInput = document.getElementById('imageInput');
+            const imageContainer = document.getElementById('imageContainer');
+
+            const updateCollagePicture = () => {
+
+                imageContainer.innerHTML = "";
+                if (selectedImages.length > 0) {
+                    imageContainer.style.border = `10px solid ${collageColor}`;
+                    const [width, height] = collageSize.split("x").map(Number);
+                    imageContainer.style.width = `${width}cm`;
+                    imageContainer.style.height = `${height}cm`;
+
+                    selectedImages.forEach(imageUrl => {
+                        const imgElement = document.createElement('img');
+                        imgElement.src = imageUrl;
+                        imgElement.classList.add('uploadedImage');
+                        imageContainer.appendChild(imgElement);
+                    });
+                }
+                else {
+                    imageContainer.style.display = "none";
+                }
+            };
+            imageInput.addEventListener('change', handleImageUploadCollage);
+            
+
+            function handleImageUploadCollage(event) {
+              
+                const files = event?.target.files;
+
+                if (files && files.length) {
+                    const fileArray = Array.from(files);
+                    const promises = [];
+
+                    Promise.all(fileArray.map(file => readFileAsync(file)))
+                        .then(results => {
+                            selectedImages.push(...results);
+
+                            updateLocalStorageTwo();
+                            handleCollageSizeChange("5x10cm");
+                            updateCollagePicture();
+                        })
+                        .catch(error => {
+                            console.error("Error reading files:", error);
+                        });
+                }
+            }
+
+            function readFileAsync(file) {
+                return new Promise((resolve, reject) => {
+                    const reader = new FileReader();
+
+                    reader.onloadend = () => {
+                        resolve(reader.result);
+                    };
+
+                    reader.onerror = reject;
+
+                    reader.readAsDataURL(file);
+                });
+            }
+
+            window.onload = () => {
+                selectedImages = JSON.parse(localStorage.getItem("selectedImages")) || [];
+                collageColor = localStorage.getItem("collageColor") || "black";
+                collageSize = localStorage.getItem("collageSize") || "5x10cm";
+
+                selectedImage = localStorage.getItem("selectedImage");
+                frameColor = localStorage.getItem("frameColor") || "black";
+                frameSize = localStorage.getItem("frameSize") || "5x10cm";
+                framePrice = localStorage.getItem("framePrice") || 5000;
+
+                updateCollagePicture();
+                updateFramedPicture();
+            };
+    </script>
 </body>
 </html>
