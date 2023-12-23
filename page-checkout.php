@@ -35,9 +35,18 @@
     <?php 
         include('includes/header.php');
     ?>
-    <div id="content-container">
+    <div class="bg-white shadow-xl mx-auto rounded-md w-[70%] mt-10 py-5">
+    <h1 class="md:text-3xl text-center">Checkout!</h1>
+      <div class="flex items-center justify-center mt-10 mb-10">
+        <div id="content-container">
+        </div>
+      </div>
+      <div class="flex items-center justify-center">
+        <div id="text-container"></div>
+      </div>
     </div>
-    <div id="text-container"></div>
+
+    
 
       
 
@@ -67,17 +76,17 @@
             <div class="p-4 md:p-5 space-y-4">
                <form>
                 <div>
-                  <label for="email"></label>
+                  <label for="email">Email:</label>
                   <input class="border border-bg-500 w-full rounded-md py-2.5 mt-5 focus:ring-2 focus:outline-none focus:ring-brand font-medium rounded-lg text-sm px-5 py-2.5  dark:bg-blue-600 dark:hover:bg-gray-300 dark:focus:ring-blue-800" type="email" id="email" name="email" require>
                 </div>
 
                 <div>
-                  <label for="fullname"></label>
+                  <label for="fullname">Fullname:</label>
                   <input class="border border-bg-500 w-full rounded-md py-2.5 mt-5 focus:ring-2 focus:outline-none focus:ring-brand font-medium rounded-lg text-sm px-5 py-2.5  dark:bg-blue-600 dark:hover:bg-gray-300 dark:focus:ring-blue-800" type="text" id="fullname" name="name" require>
                 </div>
 
                 <div>
-                  <label for="address"></label>
+                  <label for="address">Address:</label>
                   <input class="border border-bg-500 w-full rounded-md py-2.5 mt-5 focus:ring-2 focus:outline-none focus:ring-brand font-medium rounded-lg text-sm px-5 py-2.5  dark:bg-blue-600 dark:hover:bg-gray-300 dark:focus:ring-blue-800" type="text" id="address" name="address" require>
                 </div>
 
@@ -113,7 +122,9 @@
         const collageSize = localStorage.getItem("collageSize");
         const collagePrice = parseFloat(localStorage.getItem("collagePrice"));
 
-
+        const email = document.getElementById('email').value;
+        const fullname = document.getElementById('fullname').value;
+        const address = document.getElementById('address').value;
         const textContainer = document.getElementById("text-container")
         const shippingFee = 2000;
 
@@ -122,14 +133,12 @@
         let totalFramePrice = framePrice + shippingFee;
         console.log(totalFramePrice)
 
-
         function submitForm() {
-          location.reload();
+            location.reload();
             // Get form values
             const email = document.getElementById('email').value;
             const fullname = document.getElementById('fullname').value;
             const address = document.getElementById('address').value;
-
 
             const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             if (!emailRegex.test(email)) {
@@ -150,11 +159,8 @@
                 address: address,
             };
 
-
-
             // Store user information in localStorage
             localStorage.setItem('userInfo', JSON.stringify(userInfo));
-
         }
         function displayUserInfo() {
             // Get the user information from localStorage
@@ -166,7 +172,20 @@
                 const userInfo = JSON.parse(storedUserInfo);
 
                 // Display user information on the screen (you can modify this as needed)
-                const userDetails = `Email: ${userInfo.email}\n Full Name: ${userInfo.fullname}\n Address: ${userInfo.address}`
+                const userDetails = `<div class="flex items-center justify-between gap-10">
+                    <div>
+                    <p>Email:</p>
+                    <p>Full Name:</p>
+                    <p> Address:</p>
+                    </div>
+                    <div>
+                    <p>
+                    ${userInfo.email},
+                    </p>
+                    <p>${userInfo.fullname}</p>
+                    <p>${userInfo.address}</p>
+                    </div>
+                    </div>`
                 textContainer.insertAdjacentHTML('beforeend', userDetails);
             }
         }
@@ -177,13 +196,25 @@
 
         // Check if frame or collage localStorage items are available
         if (frameColor && frameSize) {
+          
             // Frame items are available
             const frameHTML = `<img src="${selectedImage}" alt="frame" />`;
-            const frameDetailsHTML = `<h1 class="text-lg font-bold mb-2">Size: ${frameSize}</h1><h1 class="text-lg font-bold">Color: ${frameColor}</h1>
-            
-            <h1 class="text-lg font-bold mb-2">Price: NGN ${framePrice.toLocaleString()}</h1>
-            <p>Shipping fee: ${shippingFee.toLocaleString()}</p>
-            <p>Total: NGN ${(totalFramePrice).toLocaleString()}</p>
+            const frameDetailsHTML = `<div class="flex items-center justify-start gap-10">
+            <div>
+            <p>Size:</p>
+            <p>Color:</p>
+            <p>Price: </p>
+            <p class="border-b-brand">Shipping fee:</p>
+            <p>Total: </p>
+            </div>
+            <div>
+            <p>${frameSize}</p>
+            <p>${frameColor}</p>
+            <p>NGN ${framePrice.toLocaleString()}</p>
+            <p>NGN ${shippingFee.toLocaleString()}</p>
+            <p>NGN ${(totalFramePrice).toLocaleString()}</p>
+            </div>
+            </div>
             `;
            
             contentContainer.style.border = `10px solid ${frameColor}`;
@@ -237,36 +268,53 @@
 }
 
 function payWithPaystack() {
-  // Replace with your actual public key
-  const publicKey = 'pk_test_4ad2c4a9c9a5bddb40931ee178ee47339f7f5d2a';
+    const publicKey = 'pk_test_4ad2c4a9c9a5bddb40931ee178ee47339f7f5d2a';
+    const storedUserInfo = localStorage.getItem('userInfo');
+    let userInfomation = JSON.parse(storedUserInfo);;
+    if (!userInfomation) {
+      const errorMsg = `Please add an address!`
+      textContainer.insertAdjacentHTML('beforeend', errorMsg);
+      return; 
+    }
+  
 
-  // Assuming totalFramePrice and shippingFee are calculated dynamically
-  // const totalFramePrice = calculateTotalFramePrice();
-  // const shippingFee = calculateShippingFee();
+    // Retrieve the selected product type from localStorage
+    const selectedProductType = localStorage.getItem('selectedProductType');
 
-  // Calculate the total amount in kobo (Naira * 100)
-  const totalAmount = (totalFramePrice) * 100;
+    // Define the variable for the selected product price
+    let selectedProductPrice = 0;
 
-  // Generate a unique reference for this transaction
-  const uniqueReference = generateUniqueReference();
+    // Check if frame or collage details are available in localStorage
+    if (selectedProductType === 'frame') {
+        selectedProductPrice = totalFramePrice;
+    } else if (selectedProductType === 'collage') {
+        selectedProductPrice = totalCollagePrice;
+    }
 
-  const handler = PaystackPop.setup({
-    key: publicKey,
-    email: 'kennyfagbenro44@gmail.com', // User's email address
-    amount: totalAmount,
-    ref: uniqueReference,
-    callback: function (response) {
-      // Handle the success callback
-      alert('Payment successful. Reference: ' + response.reference);
-    },
-    onClose: function () {
-      // Handle the close event (optional)
-      alert('Transaction closed.');
-    },
-  });
+    // Calculate the total amount in kobo (Naira * 100)
+    const totalAmount = selectedProductPrice * 100;
 
-  handler.openIframe();
+    // Generate a unique reference for this transaction
+    const uniqueReference = generateUniqueReference();
+
+    const handler = PaystackPop.setup({
+        key: publicKey,
+        email: userInfomation.email, // User's email address
+        amount: totalAmount,
+        ref: uniqueReference,
+        callback: function (response) {
+            // Handle the success callback
+            alert('Payment successful. Reference: ' + response.reference);
+        },
+        onClose: function () {
+            // Handle the close event (optional)
+            alert('Transaction closed.');
+        },
+    });
+
+    handler.openIframe();
 }
+
 
    
 </script>

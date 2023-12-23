@@ -76,7 +76,7 @@
     </div>
     <div id="default-tab-content">
         <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800 md:w-[70%] md:mx-auto" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-        <form action="http://localhost/wordpress/checkout/" id="imageUpload" method="post">
+        <form action="http://localhost/wordpress/checkout/" id="imageUploadFrame" method="post">
           <div class="flex items-center flex-col justify-center">
               <img class="mb-10 shadow-lg" id="framedPicture" alt="Framed Picture" />
             <label for="imageInputTwo" class="cursor-pointer relative">
@@ -117,34 +117,35 @@
     </form>
     </div>
 
-    <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800  w-[70%] mx-auto" id="dashboard" role="tabpanel" aria-labelledby="dashboard-tab">
+    <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800  md:w-[70%] mx-auto" id="dashboard" role="tabpanel" aria-labelledby="dashboard-tab">
 
-    <form action="http://localhost/wordpress/checkout/" id="imageUpload" method="post">
+    <form action="http://localhost/wordpress/checkout/" id="imageUploadCollage" method="post">
       <div class="flex flex-col">
         <div class="grid grid-cols-2 md:grid-cols-3 border-black border-[10px] gap-2 mx-auto w-[50%] mb-10 shadow-lg md:w-[20%]" id="imageContainer"></div>
         <label for="imageInput" class="cursor-pointer relative mx-auto">
-            <div class="font-bold h-[100px] w-[100px] text-center  text-[70px] text-brand border rounded-full border-brand hover:shadow-xl">+</div>
+        <div class="font-bold h-[70px] w-[70px] flex items-center justify-center text-[70px] text-brand border rounded-full border-brand ">+</div>
         </label>
           <input type="file" id="imageInput" accept="image/*" multiple >
       </div>
       
-       
+      <div class="grid md:grid-cols-none grid-cols-2">
         <div class="mt-10">
-            <div class="flex items-center justify-start">
-              <div>
-                <div class="font-normal text-sm">Choose a frame color:</div>
-                  <button class="border rounded-md py-2.5 px-10 text-gray-500" type="button" onclick="handleCollageColorChange('black')" name="collageColor">Black</button>
-                  <button class="border rounded-md py-2.5 px-10 text-gray-500 mx-6" type="button" onclick="handleCollageColorChange('white')" name="collageColor">White</button>
-                  <button class="border rounded-md py-2.5 px-10 text-gray-500" type="button" onclick="handleCollageColorChange('brown')" name="collageColor">Brown</button>
+            <div class="md:flex md:items-center md:justify-start">
+              <div class="font-normal text-sm">Choose a frame color:</div>
+              <div class="flex flex-wrap">
+                  <button class="border rounded-md py-2 md:py-3 px-2.5 text-xs md:text-normal md:px-10 text-gray-500 ml-5 mt-3 md:mt-0" type="button" onclick="handleCollageColorChange('black')" name="collageColor">Black</button>
+                  <button class="border rounded-md py-2 md:py-3 px-2.5 text-xs md:text-normal md:px-10 text-gray-500 ml-5 mt-3 md:mt-0 mx-6" type="button" onclick="handleCollageColorChange('white')" name="collageColor">White</button>
+                  <button class="border rounded-md py-2 md:py-3 px-2.5 text-xs md:text-normal md:px-10 text-gray-500 ml-5 mt-3 md:mt-0" type="button" onclick="handleCollageColorChange('brown')" name="collageColor">Brown</button>
               </div>
             </div>
-            <div  class="flex items-center justify-start mt-5">
-              <div>
+    </div>
+            <div  class="md:flex md:items-center md:justify-start mt-10">
               <div class="font-normal text-sm">Choose Frame Size: </div>
-                <button class="border rounded-md py-2.5 px-10 text-gray-500" type="button" onclick="handleCollageSizeChange('5x15cm')" name="collageSize">5x10cm</button>
-                <button class="border rounded-md py-2.5 px-10 text-gray-500 mx-6" type="button" onclick="handleCollageSizeChange('8x12cm')" name="collageSize">8x12cm</button>
-                <button class="border rounded-md py-2.5 px-10 text-gray-500 mx-6" type="button" onclick="handleCollageSizeChange('10x15cm')" name="collageSize">10x15cm</button>
-                <button class="border rounded-md py-2.5 px-10 text-gray-500" type="button" onclick="handleCollageSizeChange('12x18cm')" name="collageSize">12x18cm</button>
+              <div class="flex flex-wrap">
+                <button class="border rounded-md py-2 md:py-3 px-2.5 text-xs md:text-normal md:px-10 text-gray-500 ml-5 mt-3 md:mt-0" type="button" onclick="handleCollageSizeChange('5x15cm')" name="collageSize">5x10cm</button>
+                <button class="border rounded-md py-2 md:py-3 px-2.5 text-xs md:text-normal md:px-10 text-gray-500 ml-5 mt-3 md:mt-0 mx-6" type="button" onclick="handleCollageSizeChange('8x12cm')" name="collageSize">8x12cm</button>
+                <button class="border rounded-md py-2 md:py-3 px-2.5 text-xs md:text-normal md:px-10 text-gray-500 ml-5 mt-3 md:mt-0 mx-6" type="button" onclick="handleCollageSizeChange('10x15cm')" name="collageSize">10x15cm</button>
+                <button class="border rounded-md py-2 md:py-3 px-2.5 text-xs md:text-normal md:px-10 text-gray-500 ml-5 mt-3 md:mt-0" type="button" onclick="handleCollageSizeChange('12x18cm')" name="collageSize">12x18cm</button>
               </div>
                 
             </div>
@@ -179,6 +180,8 @@
 
             const priceFrame = document.getElementById("price_tag_frame");
             const priceCollage = document.getElementById("price_tag_collage");
+            const frameForm = document.getElementById("imageUploadFrame")
+            
 
             //get color buttons
             const colorBtns = document.getElementsByName("frameColor");
@@ -255,6 +258,7 @@
                 localStorage.setItem("frameColor", frameColor);
                 localStorage.setItem("frameSize", frameSize);
                 localStorage.setItem("framePrice", framePrice);
+                localStorage.setItem('selectedProductType', 'frame'); 
             };
 
             const handleImageUpload = (event) => {
@@ -313,6 +317,7 @@
                 localStorage.setItem("collageColor", collageColor);
                 localStorage.setItem("collageSize", collageSize);
                 localStorage.setItem("collagePrice", priceValue);
+                localStorage.setItem('selectedProductType', 'collage')
             };
 
             const handleCollageColorChange = (color) => {
@@ -347,9 +352,7 @@
                         imageContainer.appendChild(imgElement);
                     });
                 }
-                else {
-                    imageContainer.style.display = "none";
-                }
+
             };
             imageInput.addEventListener('change', handleImageUploadCollage);
             

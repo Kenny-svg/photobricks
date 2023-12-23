@@ -18,7 +18,7 @@
   <div class="max-w-screen-xl flex items-center justify-between mx-auto p-4">
   <a class="w-[12%]" href="http://localhost/wordpress/">
     <img class="md:block hidden w-[100%]" src="http://localhost/wordpress/wp-content/uploads/2023/12/photo-brics-logo-pink.png" />
-    <img class="w-[90%] md:hidden" src="http://localhost/wordpress/wp-content/uploads/2023/12/photo-bricks-logo-m-3.png" alt="brand-logo" />
+    <img class="w-[90%] md:hidden" src="http://localhost/wordpress/wp-content/uploads/2023/12/newmobile.png" alt="brand-logo" />
   </a>
   
     <button data-collapse-toggle="navbar-hamburger" type="button" class="inline-flex items-center justify-center p-2 w-10 h-10 text-sm text-white rounded-lg " aria-controls="navbar-hamburger" aria-expanded="false">
